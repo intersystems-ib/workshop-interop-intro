@@ -1,0 +1,11 @@
+{
+    "objectscript.export.folder": "src",
+    "objectscript.conn": {
+        "active": true,
+        "username": "superuser",
+        "password": "SYS",
+        "ns": "USER",
+        "port": 52773,
+        "host": "localhost"
+    },
+}
