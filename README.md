@@ -10,7 +10,7 @@ You can find more in-depth information in https://learning.intersystems.com.
 * [Visual Studio Code](https://code.visualstudio.com/download) + [InterSystems ObjectScript VSCode Extension](https://marketplace.visualstudio.com/items?itemName=daimor.vscode-objectscript)
 
 # Setup
-Build the image and run the container we will use during the workshop:
+Build the image we will use during the workshop:
 
 ```console
 $ git clone https://github.com/intersystems-ib/workshop-interop-intro
@@ -24,6 +24,10 @@ Then, open the `workshop-interop-intro` in your VS Code.
 # Examples  
 
 ## (a). Start FindRateProduction
+* Run the containers we will use in the workshop:
+```
+docker-compose up -d
+```
 * Open the [Management Portal](http://localhost:52773/csp/sys/UtilHome.csp).
 * Login using the default `superuser`/ `SYS` account.
 * *Interoperability > Namespace USER > List > Productions > Demo.Loan.FindRateProduction > Open*
