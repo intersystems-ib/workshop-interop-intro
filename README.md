@@ -68,4 +68,7 @@ Then, open the `workshop-interop-intro` in your VS Code.
 * Find some of the rules that are using a *Data Transform*.
 * Double-click on the Data Transform element and open the *DTL Editor*.
 * Have a look at how can messages be transformed.
- 
+
+# Explore more complex scenarios
+Have a look at this example where you can see in action a readmission demo scenario using IA in IRIS:
+https://github.com/intersystems-community/irisdemo-demo-readmission
