@@ -23,7 +23,7 @@ Then, open the `workshop-interop-intro` in your VS Code.
 
 # Examples  
 
-## (a). Start FindRateProduction
+## (a). Start FindRateProduction
 * Run the containers we will use in the workshop:
 ```
 docker-compose up -d
@@ -42,7 +42,7 @@ docker-compose up -d
 * Enter some input and see the output in the resulting Visual Trace.
 * Have a look at the involved Business Operation and Messages in VS Code.
 
-## (c). Make a sample loan request
+## (c). Make a sample loan request
 * Open http://localhost:52773/csp/user/DemoLoanForm.csp and enter some data (you can test with different values).
 * Go back to your production and open the [Message Viewer](http://localhost:52773/csp/user/EnsPortal.MessageViewer.zen).
 * Have a look at the messages, go through some of the traces.
