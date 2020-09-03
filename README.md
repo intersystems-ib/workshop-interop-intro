@@ -16,7 +16,6 @@ Build the image we will use during the workshop:
 $ git clone https://github.com/intersystems-ib/workshop-interop-intro
 $ cd workshop-interop-intro
 $ docker-compose build
-$ docker-compose up -d
 ```
 
 Then, open the `workshop-interop-intro` in your VS Code.
@@ -26,7 +25,7 @@ Then, open the `workshop-interop-intro` in your VS Code.
 ## (a). Start FindRateProduction
 * Run the containers we will use in the workshop:
 ```
-docker-compose up -d
+docker-compose up
 ```
 * Open the [Management Portal](http://localhost:52773/csp/sys/UtilHome.csp).
 * Login using the default `superuser`/ `SYS` account.
