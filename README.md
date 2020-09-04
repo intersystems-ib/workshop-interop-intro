@@ -32,12 +32,12 @@ docker-compose up
 * *Interoperability > Namespace USER > List > Productions > Demo.Loan.FindRateProduction > Open*
 * Start Production
 * Have a look at the Business Services, Business Processes and Business Operations.
-* Click on the *connector* to see how the components are linked.
+* Click on the *connector* (green ball) to see how the components are linked.
 * See the *Legend* to understand the meaning of the different colors of the components.
 
 ## (b). Test a Business Operation
 * Click on `Demo.Loan.WebOperations`
-* Go to Actions > Test > Choose a "Demo.Loan.CreditRatingRequest".
+* Go to *Actions* tab > Test > Choose a `Demo.Loan.CreditRatingRequest` message.
 * Enter some input and see the output in the resulting Visual Trace.
 * Have a look at the involved Business Operation and Messages in VS Code.
 
@@ -48,7 +48,7 @@ docker-compose up
 * Pay attention to the elements involved, sync/async calls, message contents and possible errors or alerts thrown.
 
 ## (d). Inspect a Business Process
-* Click on `Demo.Loan.FindRateDecisionProcessBPL`.
+* Back in [Demo.Loan.FindRateProduction Production](http://localhost:52773/csp/user/EnsPortal.ProductionConfig.zen?PRODUCTION=Demo.Loan.FindRateProduction), click on `Demo.Loan.FindRateDecisionProcessBPL`.
 * On the settings tab, click on the magnifyer icon on the *Class name* setting.
 * Inspect the graphical BPL definition of the process.
 * When you are done, stop the production.
@@ -65,7 +65,7 @@ docker-compose up
 * Explore some the new messages that have appeared. Notice the HL7 messages.
 
 ## (g). Explore routing rules and data transforms
-* Click on `XYZ_Router`.
+* Back in Demo.HL7.MsgRouter.Production Production configuration page, click on `XYZ_Router`.
 * Click on the magnifying glass on *Business Rule Name* in the Settings Tab.
 * Notice the different routing rules based on the content of the HL7 messages.
 * Find some of the rules that are using a *Data Transform*.
