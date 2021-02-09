@@ -1,4 +1,4 @@
-FROM store/intersystems/irishealth-community:2020.2.0.211.0
+FROM intersystemsdc/irishealth-community:2020.3.0.221.0-zpm
 
 # create /app
 USER root
@@ -13,17 +13,11 @@ RUN chmod +x /irissession.sh
 WORKDIR /app 
 COPY --chown=$ISC_PACKAGE_MGRUSER:$ISC_PACKAGE_IRISGROUP install /app/install
 
-# download zpm
-RUN mkdir -p /app/deps \
- && cd /app/deps \
- && wget -q https://pm.community.intersystems.com/packages/zpm/latest/installer -O zpm.xml
-
 SHELL ["/irissession.sh"]
 
 RUN \
-  # install zpm + webterminal
   zn "USER" \
-  do $system.OBJ.Load("/app/deps/zpm.xml", "ck") \
+  # install webterminal
   zpm "install webterminal" \
   # install demo
   do $SYSTEM.OBJ.LoadDir("/app/install/HL7", "ck", ,1) \
