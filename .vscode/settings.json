@@ -8,7 +8,8 @@
         "port": 52773,
         "host": "localhost",
         "links": {
-            "SOAP Wizard": "${serverUrl}/isc/studio/templates/%25ZEN.Template.AddInWizard.SOAPWizard.cls?Namespace=${namespace}${serverAuth}"
+            "SOAP Wizard": "${serverUrl}/isc/studio/templates/%25ZEN.Template.AddInWizard.SOAPWizard.cls?Namespace=${namespace}${serverAuth}",
+            "WebTerminal": "${serverUrl}/terminal/"
         }
     },
 }
