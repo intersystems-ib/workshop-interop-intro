@@ -1,4 +1,4 @@
-FROM intersystemsdc/irishealth-community:2020.3.0.221.0-zpm
+FROM intersystemsdc/irishealth-community:2021.1.0.215.3-zpm
 
 # create /app
 USER root
