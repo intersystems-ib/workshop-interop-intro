@@ -23,7 +23,7 @@ ClassMethod TestBigJSON() As %Status
         set longJson.result = "OK"
         do longJson.%Set("document", big, "stream")
 
-        set fileName = "/test/longJson.json"
+        set fileName = "/test/out/longJson.json"
         set file = ##class(%Stream.FileCharacter).%New()
         set file.Filename = fileName
         do longJson.%ToJSON(file)

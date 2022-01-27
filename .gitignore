@@ -3,5 +3,4 @@ obj
 bin
 *.bak
 test/inarchive/*.txt*
-test/out/*.txt
-test/longJson.json
+test/out/*
