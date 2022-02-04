@@ -36,7 +36,7 @@ ClassMethod DiscardAllSuspended() As %Status
     quit ret
 }
 
-/// Discard all suspended messages
+/// Save all suspended messages (HL7)
 /// do ##class(Util.SuspendedMsg).SaveAllSuspended("/tmp/suspended/"_$namespace_"/")
 ClassMethod SaveAllSuspended(pOutputPath As %String = {"/tmp/"_$namespace_"/"}) As %Status
 {
