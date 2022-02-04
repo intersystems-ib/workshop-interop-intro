@@ -4,18 +4,15 @@ Class Util.SuspendedMsg Extends %RegisteredObject
 {
 
 /// Discard all suspended messages
-/// do ##class(Test.Suspended).DiscardAllSuspended()
+/// do ##class(Util.SuspendedMsg).DiscardAllSuspended()
 ClassMethod DiscardAllSuspended() As %Status
 {
     set ret = $$$OK
     try {
-        &sql(DECLARE C2 CURSOR FOR
-            SELECT Id
-                INTO :tID
-                FROM Ens.MessageHeader
-                WHERE Status = $$$eMessageStatusSuspended)
-        &sql(OPEN C2)
-        &sql(FETCH C2)
+        &sql(DECLARE cDiscard CURSOR FOR
+            SELECT Id INTO :tID FROM Ens.MessageHeader WHERE Status = $$$eMessageStatusSuspended)
+        &sql(OPEN cDiscard)
+        &sql(FETCH cDiscard)
     
         while SQLCODE=0 {
             set tObj = ##class(Ens.MessageHeader).%OpenId(tID)
@@ -29,13 +26,64 @@ ClassMethod DiscardAllSuspended() As %Status
                 write !,"[OK] Message "_tID_" discarded"
             }
 
-            &sql(FETCH C2)
+            &sql(FETCH cDiscard)
         }
-        &sql(CLOSE C2)
+        &sql(CLOSE cDiscard)
 
     } catch ex {
         set ret = ex.AsStatus()
     }
+    quit ret
+}
+
+/// Discard all suspended messages
+/// do ##class(Util.SuspendedMsg).SaveAllSuspended("/tmp/suspended/"_$namespace_"/")
+ClassMethod SaveAllSuspended(pOutputPath As %String = {"/tmp/"_$namespace_"/"}) As %Status
+{
+    set ret = $$$OK
+    try {
+		set (nTotal, nOK) = 0
+		
+        set (tID, tTargetConfigName, tMessageBodyClassName, tMessageBodyId) = ""
+        &sql(DECLARE cSave CURSOR FOR
+            SELECT Id, TargetConfigName, MessageBodyClassName, MessageBodyId 
+            INTO :tID, :tTargetConfigName, :tMessageBodyClassName, :tMessageBodyId
+            FROM Ens.MessageHeader WHERE Status = $$$eMessageStatusSuspended)
+        &sql(OPEN cSave)
+        &sql(FETCH cSave)
+    
+        while SQLCODE=0 {
+	        
+	        set nTotal = nTotal + 1
+
+            if tMessageBodyClassName="EnsLib.HL7.Message" {
+                set savePath = pOutputPath_tTargetConfigName_"/"
+                if ##class(%File).CreateDirectoryChain(savePath) {
+                    set hl7 = ##class(EnsLib.HL7.Message).%OpenId(tMessageBodyId)
+                    if $isobject(hl7) {
+                    	set filePath=savePath_tID_".hl7"
+                    	set sc = hl7.OutputToFile(filePath)
+                    	if $$$ISOK(sc) set nOK = nOK + 1
+                    } else {
+	                    write !,"[ERROR] Message ID "_tID_". Cannot open HL7 "_tMessageBodyId
+                    }
+                } 
+            } else {
+                write !,"[ERROR] Message ID "_tID_" not supported ("_tMessageBodyClassName_")"
+            }
+            
+            &sql(FETCH cSave)
+        }
+        &sql(CLOSE cSave)
+
+		write !,"Total messages: ",nTotal
+        write !,"Sucessfully saved messages: ", nOK
+
+    } catch ex {
+        set ret = ex.AsStatus()
+        do $system.OBJ.DisplayError(ret)
+    }
+    
     quit ret
 }
 
