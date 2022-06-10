@@ -1,4 +1,5 @@
-FROM intersystemsdc/irishealth-community:2021.2.0.649.0-zpm
+ARG IMAGE=intersystemsdc/irishealth-community:2022.1.0.209.0-zpm
+FROM $IMAGE
 
 # create /app
 USER root

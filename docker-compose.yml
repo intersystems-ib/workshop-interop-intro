@@ -5,6 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: iris
+    command: --check-caps false
     ports:
       - 51883:1972
       - 52883:52773
