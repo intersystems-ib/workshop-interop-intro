@@ -9,7 +9,6 @@ services:
     ports:
       - 51883:1972
       - 52883:52773
-      - 53883:53773
     volumes:
       - ./test:/test
       - ./Practice:/Practice
