@@ -1,32 +1,22 @@
-ARG IMAGE=intersystemsdc/irishealth-community
+ARG IMAGE=containers.intersystems.com/intersystems/iris-community:2024.1
 FROM $IMAGE
 
-# create /app
 USER root
-RUN mkdir /app && chown $ISC_PACKAGE_MGRUSER:$ISC_PACKAGE_IRISGROUP /app
 
-USER ${ISC_PACKAGE_MGRUSER}
+# create directory to copy files into image
+WORKDIR /opt/irisapp
+RUN chown -R irisowner:irisowner /opt/irisapp
 
-COPY --chown=$ISC_PACKAGE_MGRUSER:$ISC_PACKAGE_IRISGROUP irissession.sh /
-RUN chmod +x /irissession.sh
+USER irisowner
 
-# copy source code
-WORKDIR /app 
-COPY --chown=$ISC_PACKAGE_MGRUSER:$ISC_PACKAGE_IRISGROUP install /app/install
+# copy files to image
+WORKDIR /opt/irisapp
+RUN mkdir -p /opt/irisapp/db
+COPY --chown=irisowner:irisowner iris.script iris.script
+COPY --chown=irisowner:irisowner src src
+COPY --chown=irisowner:irisowner install install
 
-SHELL ["/irissession.sh"]
-
-RUN \
-  zn "USER" \
-  # install webterminal
-  zpm "install webterminal" \
-  # install demo
-  do $SYSTEM.OBJ.LoadDir("/app/install/HL7", "ck", ,1) \
-  do $SYSTEM.OBJ.LoadDir("/app/install/Loan", "ck", ,1) \
-  do $system.OBJ.Load("/app/install/Loan/latest/csp/app/DemoLoanForm.csp", "ck") \
-  do $system.OBJ.Load("/app/install/Loan/latest/csp/app/DemoLoanSubmit.csp", "ck") \  
-  set sc = 1
-  
-# bringing the standard shell back
-SHELL ["/bin/bash", "-c"]
-CMD [ "-l", "/usr/irissys/mgr/messages.log" ]
+# run iris.script
+RUN iris start IRIS \
+    && iris session IRIS < /opt/irisapp/iris.script \
+    && iris stop IRIS quietly

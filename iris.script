@@ -1,0 +1,22 @@
+    // unexpire passwords for dev mode
+    new $namespace
+    set $namespace = "%SYS"
+    do ##class(Security.Users).UnExpireUserPasswords("*")
+
+    // install zpm
+    set r=##class(%Net.HttpRequest).%New(),r.Server="pm.community.intersystems.com",r.SSLConfiguration="ISC.FeatureTracker.SSL.Config" d r.Get("/packages/zpm/latest/installer"),$system.OBJ.LoadStream(r.HttpResponse.Data,"c")
+
+    // load code
+    set $namespace = "USER"
+    
+    do $SYSTEM.OBJ.LoadDir("/opt/irisapp/install/HL7", "ck", ,1)
+    do $SYSTEM.OBJ.LoadDir("/opt/irisapp/install/Loan", "ck", ,1)
+    do $system.OBJ.Load("/opt/irisapp/install/Loan/latest/csp/app/DemoLoanForm.csp", "ck")
+    do $system.OBJ.Load("/opt/irisapp/install/Loan/latest/csp/app/DemoLoanSubmit.csp", "ck")
+
+    do $SYSTEM.OBJ.LoadDir("/opt/irisapp/src", "ck", .errorlog, 1)
+
+    // install webterminal
+    zpm "install webterminal"
+
+    halt

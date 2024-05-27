@@ -27,7 +27,7 @@ Then, open the `workshop-interop-intro` in your VS Code.
 ```
 docker-compose up
 ```
-* Open the [Management Portal](http://localhost:52883/csp/sys/UtilHome.csp).
+* Open the [Management Portal](http://localhost:52773/csp/sys/UtilHome.csp).
 * Login using the default `superuser`/ `SYS` account.
 * *Interoperability > Namespace USER > List > Productions > Demo.Loan.FindRateProduction > Open*
 * Start Production
@@ -42,13 +42,13 @@ docker-compose up
 * Have a look at the involved Business Operation and Messages in VS Code.
 
 ## (c). Make a sample loan request
-* Open http://localhost:52883/csp/user/DemoLoanForm.csp and enter some data (you can test with different values).
-* Go back to your production and open the [Message Viewer](http://localhost:52883/csp/user/EnsPortal.MessageViewer.zen).
+* Open http://localhost:52773/csp/user/DemoLoanForm.csp and enter some data (you can test with different values).
+* Go back to your production and open the [Message Viewer](http://localhost:52773/csp/user/EnsPortal.MessageViewer.zen).
 * Have a look at the messages, go through some of the traces.
 * Pay attention to the elements involved, sync/async calls, message contents and possible errors or alerts thrown.
 
 ## (d). Inspect a Business Process
-* Back in [Demo.Loan.FindRateProduction Production](http://localhost:52883/csp/user/EnsPortal.ProductionConfig.zen?PRODUCTION=Demo.Loan.FindRateProduction), click on `Demo.Loan.FindRateDecisionProcessBPL`.
+* Back in [Demo.Loan.FindRateProduction Production](http://localhost:52773/csp/user/EnsPortal.ProductionConfig.zen?PRODUCTION=Demo.Loan.FindRateProduction), click on `Demo.Loan.FindRateDecisionProcessBPL`.
 * On the settings tab, click on the magnifyer icon on the *Class name* setting.
 * Inspect the graphical BPL definition of the process.
 * When you are done, stop the production.
@@ -61,7 +61,7 @@ docker-compose up
 
 ## (f). Process some sample HL7 messages
 * In your VS Code with `workshop-interop-intro` opened, copy `test/*.txt` files into `test/in` subdirectory.
-* Go back to the production and see [Message Viewer](http://localhost:52883/csp/user/EnsPortal.MessageViewer.zen).
+* Go back to the production and see [Message Viewer](http://localhost:52773/csp/user/EnsPortal.MessageViewer.zen).
 * Explore some the new messages that have appeared. Notice the HL7 messages.
 
 ## (g). Explore routing rules and data transforms
@@ -72,6 +72,3 @@ docker-compose up
 * Double-click on the Data Transform element and open the *DTL Editor*.
 * Have a look at how can messages be transformed.
 
-# Explore more complex scenarios
-Have a look at this example where you can see in action a readmission demo scenario using IA in IRIS:
-https://github.com/intersystems-community/irisdemo-demo-readmission
