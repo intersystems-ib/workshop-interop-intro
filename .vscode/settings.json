@@ -5,7 +5,7 @@
         "username": "superuser",
         "password": "SYS",
         "ns": "USER",
-        "port": 52883,
+        "port": 52773,
         "host": "localhost",
         "docker-compose": {
             "service": "iris"

@@ -1,0 +1,8 @@
+OrderPriority,Discount,UnitPrice,ShippingCost,CustomerID,ShipMode,ProductCategory,ProductSubCategory,ProductContainer,ProductName,OrderDate,Quantity,Sales,OrderID
+Not Specified,0.01,2.88,0.5,2,Regular Air,Office Supplies,Labels,Small Box,Avery 49,5/28/2012,2,5.9,88525
+High,0.01,2.84,0.93,3,Express Air,Office Supplies,Pens & Art Supplies,Wrap Bag,SANFORD Liquid Accent Tank-Style Highlighters,7/7/2010,4,13.01,88522
+Not Specified,0.03,6.68,6.15,3,Express Air,Office Supplies,Paper,Small Box,Xerox 1968,7/27/2011,7,49.92,88523
+Not Specified,0.01,5.68,3.6,3,Regular Air,Office Supplies,"Scissors, Rulers and Trimmers",Small Pack,Acme Preferred Stainless Steel Scissors,7/27/2011,7,41.64,88523
+Not Specified,0,205.99,2.5,3,Express Air,Technology,Telephones and Communication,Small Box,V70,7/27/2011,8,1446.67,88523
+Medium,0.09,55.48,14.3,3,Express Air,Office Supplies,Paper,Small Box,Xerox 194,11/9/2011,37,2011.67,88524
+Low,0.08,120.97,26.3,3,Delivery Truck,Technology,Office Machines,Jumbo Drum,Canon S750 Color Inkjet Printer,7/1/2013,12,1451.37,88526

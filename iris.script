@@ -8,6 +8,8 @@
 
     // load code
     set $namespace = "USER"
+
+    do ##class(Ens.Config.Credentials).SetCredential("MySQL_User","testuser","testpassword")
     
     do $SYSTEM.OBJ.LoadDir("/opt/irisapp/install/HL7", "ck", ,1)
     do $SYSTEM.OBJ.LoadDir("/opt/irisapp/install/Loan", "ck", ,1)

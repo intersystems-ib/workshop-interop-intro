@@ -1,5 +1,5 @@
-version: "2.2"
 services:
+
   iris:
     build:
       context: .
@@ -11,3 +11,17 @@ services:
     volumes:
       - ./test:/test
       - ./Practice:/Practice
+      - ./install:/install
+  
+  mysql:
+    build:
+      context: mysql
+      dockerfile: Dockerfile
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: testdb
+      MYSQL_USER: testuser
+      MYSQL_PASSWORD: testpassword
+    ports:
+      - "3306:3306"
