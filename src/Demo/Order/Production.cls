@@ -23,7 +23,7 @@ XData ProductionDefinition
     <Setting Target="Adapter" Name="JGService">EnsLib.JavaGateway.Service</Setting>
     <Setting Target="Host" Name="RequestClass">Demo.Order.CSVRecordMap.Record</Setting>
     <Setting Target="Host" Name="InputParameters">*CustomerID</Setting>
-    <Setting Target="Host" Name="Query">select CustomerID,CustomerName,CustomerSegment from tableName where CustomerID = ?</Setting>
+    <Setting Target="Host" Name="Query">select CustomerID,CustomerName,CustomerSegment from customer where CustomerID = ?</Setting>
     <Setting Target="Host" Name="ParamSQLTypes"></Setting>
     <Setting Target="Host" Name="ResponseClass">Demo.Order.Msg.CustomerInfo</Setting>
   </Item>
