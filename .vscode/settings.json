@@ -1,5 +1,4 @@
 {
-    "objectscript.export.folder": "src",
     "objectscript.conn": {
         "active": true,
         "username": "superuser",
