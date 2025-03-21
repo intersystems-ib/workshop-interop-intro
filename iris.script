@@ -3,22 +3,34 @@
     set $namespace = "%SYS"
     do ##class(Security.Users).UnExpireUserPasswords("*")
 
-    // install zpm
-    set r=##class(%Net.HttpRequest).%New(),r.Server="pm.community.intersystems.com",r.SSLConfiguration="ISC.FeatureTracker.SSL.Config" d r.Get("/packages/zpm/latest/installer"),$system.OBJ.LoadStream(r.HttpResponse.Data,"c")
+    // create namespace & database
+    do ##class(%SQL.Statement).%ExecDirect(, "CREATE DATABASE INTEROP ON DIRECTORY '/usr/irissys/mgr/interop/'")
+    do ##class(%EnsembleMgr).EnableNamespace("INTEROP")
 
-    // load code
-    set $namespace = "USER"
+    set $namespace = "INTEROP"
 
+    // install ipm
+    set version="latest" s r=##class(%Net.HttpRequest).%New(),r.Server="pm.community.intersystems.com",r.SSLConfiguration="ISC.FeatureTracker.SSL.Config" d r.Get("/packages/zpm/"_version_"/installer"),$system.OBJ.LoadStream(r.HttpResponse.Data,"c")
+    zpm "enable -community"
+
+    // install webterminal
+    zpm "install webterminal"
+    zpm "install objectscript-json-trace-viewer"
+
+    // create credentials
     do ##class(Ens.Config.Credentials).SetCredential("MySQL_User","testuser","testpassword")
-    
-    do $SYSTEM.OBJ.LoadDir("/opt/irisapp/install/HL7", "ck", ,1)
+    do ##class(Ens.Config.Credentials).SetCredential("StockWS_User","superuser","SYS")
+
+    // load Loan example code
     do $SYSTEM.OBJ.LoadDir("/opt/irisapp/install/Loan", "ck", ,1)
     do $system.OBJ.Load("/opt/irisapp/install/Loan/latest/csp/app/DemoLoanForm.csp", "ck")
     do $system.OBJ.Load("/opt/irisapp/install/Loan/latest/csp/app/DemoLoanSubmit.csp", "ck")
 
+    // load source code (Order)
     do $SYSTEM.OBJ.LoadDir("/opt/irisapp/src", "ck", .errorlog, 1)
 
-    // install webterminal
-    zpm "install webterminal"
+    // import web applications
+    set $namespace = "%SYS"
+    do ##class(Security.Applications).Import("/opt/irisapp/install/order-api-webapp.xml")
 
     halt
