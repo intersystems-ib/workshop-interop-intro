@@ -1,16 +1,32 @@
-# Workshop: IRIS Interoperability Intro
-Have a look at some examples you can use to learn the main ideas involved in InterSystems IRIS Interoperability framework. 
+# 🚀 Workshop: Introduction to InterSystems IRIS Interoperability
 
-You can find more in-depth information in https://learning.intersystems.com.
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+[![Docker Ready](https://img.shields.io/badge/docker-ready-blue)](https://www.docker.com/)
+[![VS Code Compatible](https://img.shields.io/badge/VS%20Code-Compatible-blueviolet)](https://code.visualstudio.com/)
+[![Maintained](https://img.shields.io/badge/status-maintained-brightgreen)](#)
+[![InterSystems IRIS](https://img.shields.io/badge/Powered%20by-InterSystems%20IRIS-ff69b4)](https://www.intersystems.com/iris)
 
-# What do you need to install? 
-* [Git](https://git-scm.com/downloads) 
-* [Docker](https://www.docker.com/products/docker-desktop) (if you are using Windows, make sure you set your Docker installation to use "Linux containers").
-* [Docker Compose](https://docs.docker.com/compose/install/)
-* [Visual Studio Code](https://code.visualstudio.com/download) + [InterSystems ObjectScript VSCode Extension](https://marketplace.visualstudio.com/items?itemName=daimor.vscode-objectscript)
+Welcome! This repository contains a set of hands-on examples to help you understand the key concepts of the **InterSystems IRIS Interoperability Framework**.
 
-# Setup
-Build & run the image we will use during the workshop:
+> For more in-depth learning resources, visit [InterSystems Learning](https://learning.intersystems.com).
+
+> If you are interested in 🏥 HealthCare interoperability, visit [workshop-healthcare-interop](https://github.com/intersystems-ib/workshop-healthcare-interop)
+
+---
+
+## 🧰 Requirements
+
+To run this workshop, please make sure you have the following installed:
+
+- [Git](https://git-scm.com/downloads)  
+- [Docker](https://www.docker.com/products/docker-desktop) and [Docker Compose](https://docs.docker.com/compose/install/) - ⚠️ On Windows, ensure Docker is set to use **Linux containers**.  
+- [Visual Studio Code](https://code.visualstudio.com/download) with [InterSystems ObjectScript Extension Pack](https://marketplace.visualstudio.com/items?itemName=intersystems-community.objectscript-pack)
+
+---
+
+## ⚙️ Setup
+
+Clone the repository and start the project using Docker Compose:
 
 ```bash
 git clone https://github.com/intersystems-ib/workshop-interop-intro
@@ -19,113 +35,160 @@ docker compose build
 docker compose up -d
 ```
 
-Then, open the `workshop-interop-intro` in your VS Code.
+Then, open the `workshop-interop-intro` folder in **VS Code**.
 
-# Examples  
+---
 
-## 1. Requesting a loan to different banks
-This example is about:
-* Receiving a loan request and asking different banks if they would approve or deny this loan
-* Wait for different answers and build a response.
+## 📂 Examples
 
-Now, check it out by following these steps:
-* Open the [Management Portal](http://localhost:52773/csp/sys/UtilHome.csp).
-* Login using the default `superuser`/ `SYS` account.
-* *Interoperability > Namespace USER > List > Productions > Demo.Loan.FindRateProduction > Open*
-* Start Production
-* Have a look at the Business Services, Business Processes and Business Operations.
-* Click on the *connector* (green ball) to see how the components are linked.
-* See the *Legend* to understand the meaning of the different colors of the components.
+### 1. 💰 Loan Request Flow: Talk to Multiple Banks
 
-### Test a Business Operation
-* Click on `Demo.Loan.WebOperations`
-* Go to *Actions* tab > Test > Choose a `Demo.Loan.CreditRatingRequest` message.
-* Enter some input and see the output in the resulting Visual Trace.
-* Have a look at the involved Business Operation and Messages in VS Code.
+In this scenario, the system receives a loan request and queries multiple banks to determine loan approval, then aggregates the responses.
 
-### Make a sample loan request
-* Open http://localhost:52773/csp/user/DemoLoanForm.csp and enter some data (you can test with different values).
-* Go back to your production and open the [Message Viewer](http://localhost:52773/csp/user/EnsPortal.MessageViewer.zen).
-* Have a look at the messages, go through some of the traces.
-* Pay attention to the elements involved, sync/async calls, message contents and possible errors or alerts thrown.
+#### 🔍 Steps:
 
-### Inspect a Business Process
-* Back in [Demo.Loan.FindRateProduction Production](http://localhost:52773/csp/user/EnsPortal.ProductionConfig.zen?PRODUCTION=Demo.Loan.FindRateProduction), click on `Demo.Loan.FindRateDecisionProcessBPL`.
-* On the settings tab, click on the magnifyer icon on the *Class name* setting.
-* Inspect the graphical BPL definition of the process.
-* When you are done, stop the production.
+1. Open the [Management Portal](http://localhost:52773/csp/sys/UtilHome.csp)
+2. Login with:  
+   - **Username:** `superuser`  
+   - **Password:** `SYS`  
+3. Navigate to:  
+   **Interoperability > Namespace: `INTEROP` > List > Productions > `Demo.Loan.FindRateProduction` > Open**
+4. Click **Start Production**
+5. Explore the **Business Services**, **Processes**, and **Operations**
+6. Use the green connector icons to inspect component interactions
+7. Use the *Legend* to understand the meaning of component colors
 
-## 2. HL7 messages handling
-This example is about showing how to handle some ADT and ORM HL7 messages.
-If you are really interested in Healthcare interoperability check out [workshop-healthcare-interop](https://github.com/intersystems-ib/workshop-healthcare-interop)
+#### 🧪 Test a Business Operation
 
-* *Interoperability > Namespace USER > List > Productions > Demo.HL7.MsgRouter.Production > Open*
-* Start production.
-* Have a look at the production, notice the prebuilt HL7 Business Services and Operations that are being used.
-* Explore the settings on those services and operations (e.g. FilePath, etc.)
+- Click `Demo.Loan.WebOperations`
+- Go to **Actions > Test**
+- Choose `Demo.Loan.CreditRatingRequest` and provide some sample input
+- Review the result in the **Visual Trace**
+- Investigate the related classes and messages in **VS Code**
 
-### Process some sample HL7 messages
-* In your VS Code with `workshop-interop-intro` opened, copy `test/*.txt` files into `test/in` subdirectory.
-* Go back to the production and see [Message Viewer](http://localhost:52773/csp/user/EnsPortal.MessageViewer.zen).
-* Explore some the new messages that have appeared. Notice the HL7 messages.
+#### 🧾 Submit a Sample Loan Request
 
-### Explore routing rules and data transforms
-* Back in Demo.HL7.MsgRouter.Production Production configuration page, click on `XYZ_Router`.
-* Click on the magnifying glass on *Business Rule Name* in the Settings Tab.
-* Notice the different routing rules based on the content of the HL7 messages.
-* Find some of the rules that are using a *Data Transform*.
-* Double-click on the Data Transform element and open the *DTL Editor*.
-* Have a look at how can messages be transformed.
+1. Open the [Loan Form Page](http://localhost:52773/csp/interop/DemoLoanForm.csp)
+2. Submit a request with test data
+3. View results in the [Message Viewer](http://localhost:52773/csp/interop/EnsPortal.MessageViewer.zen)
+4. Review messages, traces, and how the system handled sync/async messaging and errors
 
-## 3. Handling Orders in CSV and querying to external database
-This example is about processing an incoming CSV order, complete customer information by querying an external MySQL database and sending a message to an API interface.
+#### 🔧 Inspect the Business Process
 
-For this example, a sample MySQL database has already been setup for you. If you want to check it out you can do the following:
+- Open `Demo.Loan.FindRateDecisionProcessBPL` from the production config
+- In the **Settings** tab, click the magnifier icon next to the *Class Name*
+- Explore the graphical **BPL (Business Process Language)** definition
+- When finished, **stop the production**
+
+---
+
+### 2. 📦 Handling Orders with DB Lookup & Web Service Call
+
+This example processes incoming orders, enriches them with customer info from a MySQL database, and sends data to web services.
+
+#### 🗃️ Check the External Database
+
+A MySQL database is already running in your Docker environment.
+
+Run the following to inspect it:
+
 ```bash
 docker exec -it mysql bash
-mysql --host=localhost --user=testuser testdb -p # use "testpassword"
+mysql --host=localhost --user=testuser testdb -p  # Password: testpassword
+```
+
+Query example:
+
+```sql
 select * from customer;
 ```
 
-```console
-mysql> select * From customer;
-+------------+------------------------+-----------------+
-| CustomerID | CustomerName           | CustomerSegment |
-+------------+------------------------+-----------------+
-|          2 | Janice Fletcher        | Corporate       |
-|          3 | Bonnie Potter          | Corporate       |
-|          5 | Ronnie Proctor         | Home Office     |
-|          6 | Dwight Hwang           | Home Office     |
-|          6 | Dwight Hwang           | Home Office     |
-|          7 | Leon Gill              | Home Office     |
-|          8 | Melanie Garner         | Home Office     |
-|          9 | Lorraine Houston       | Home Office     |
-|         10 | Meredith Norris Thomas | Home Office     |
-|         11 | Marcus Dunlap          | Home Office     |
-|         12 | Kara Pace              | Home Office     |
-|         14 | Gwendolyn F Tyson      | Small Business  |
-|         15 | Timothy Reese          | Small Business  |
-|         16 | Sarah Ramsey           | Small Business  |
-|         17 | Florence Hsu Schwarz   | Small Business  |
-|         18 | Laurie Hanna           | Small Business  |
-|         19 | Jim Rodgers            | Small Business  |
-|         20 | Marion Nolan Kaplan    | Small Business  |
-|         21 | Tony Wilkins Winters   | Small Business  |
-|         23 | Lynn Moss              | Corporate       |
-|         24 | Edna Thomas            | Corporate       |
-|         25 | Virginia Hardison      | Corporate       |
-|         26 | Marguerite Kane        | Corporate       |
-|         27 | Guy Gallagher          | Corporate       |
-|         28 | Ronnie McNamara        | Corporate       |
-|         29 | Elizabeth Walker       | Corporate       |
-|         31 | Alice Capps            | Corporate       |
-+------------+------------------------+-----------------+
+> 🧠 You'll find sample customer data preloaded for testing.
+
+#### ▶️ Start the Order Production
+
+1. Navigate to:  
+   **Interoperability > Namespace: `INTEROP` > List > Productions > `Demo.Order.Production` > Open**
+2. Click **Start Production**
+
+#### 📁 Process a Sample CSV File
+
+1. In VS Code, copy files from `test/*.csv` into the `test/in/` folder
+2. Watch the messages flow in the [Message Viewer](http://localhost:52773/csp/user/EnsPortal.MessageViewer.zen)
+
+#### 🌐 Add a SOAP Web Service to Update Stock
+
+Use the provided WSDL file to generate a web client:
+
+1. In VS Code, open the **SOAP Wizard**
+2. Use the following options:
+   - **WSDL File:** `/install/StockSoapService.wdsl`
+   - **Proxy Class Package:** `Demo.Order.WSC.Stock`
+   - ✅ *Check "Create Business Operation"*
+   - **Operation Class Package:** `Demo.Order.WSC.Stock.BO`
+   - **Request/Response Package:** `Demo.Order.WSC.Stock.Msg`
+
+Then:
+
+3. In the production:
+   - Add a new **Business Operation**
+   - Set class to: `Demo.Order.WSC.Stock.BO.StockSoapServiceSoap`
+   - Name it: `StockSoap WS Out`
+4. Under Settings:
+   - Add **SOAP Credentials**: `StockWS_User`
+   - ✅ *Check "Enabled"*
+5. Use **Actions > Test** to verify connectivity
+
+#### 🔁 Update the Order Process to Use the Web Service
+
+Now edit the Order Business Process to call the new SOAP operation.
+
+```text
+Edit the BPL to include a new step calling `StockSoap WS Out`
 ```
 
-* *Interoperability > Namespace USER > List > Productions > Demo.Order.Production > Open*
-* Start production.
+You can use the following image as a guide:
 
-### Process some a sample CSV message
-* In your VS Code with `workshop-interop-intro` opened, copy `test/*.csv` files into `test/in` subdirectory.
-* Go back to the production and see [Message Viewer](http://localhost:52773/csp/user/EnsPortal.MessageViewer.zen).
-* Explore some the new messages that have appeared.
+<img src="./img/order-process-stock.png" width="400" alt="Order Process with Stock Update" />
+
+
+#### 🌐 Add a REST Order API
+
+Now, you will add a new API to receive orders via REST.
+
+1. In the production, add a new **Business Service**:
+   - **Service Class**: `Demo.Order.BS.OrderAPI`
+   - **Service Name**: `Order API In`
+   - ✅ Check "Enable now"
+
+2. Test the service using the included [Postman collection](./workshop-interop-intro.postman_collection.json)  
+   **or** use `curl` from your terminal:
+
+```bash
+curl -X POST http://localhost:52773/order/api/order \
+  -H "Content-Type: application/json" \
+  -d '{
+    "OrderPriority": "Not Specified",
+    "Discount": "0",
+    "UnitPrice": "205.99",
+    "ShippingCost": "2.5",
+    "CustomerID": "3",
+    "ShipMode": "Express Air",
+    "ProductCategory": "Technology",
+    "ProductSubCategory": "Telephones and Communication",
+    "ProductContainer": "Small Box",
+    "ProductName": "V70",
+    "OrderDate": "7/27/2011",
+    "Quantity": "8",
+    "Sales": "1446.67",
+    "OrderID": "88523"
+}'
+```
+
+> 💡 Check the [Message Viewer](http://localhost:52773/csp/user/EnsPortal.MessageViewer.zen) to see how the new REST request flows through the production.
+
+---
+
+## 🧑‍🏫 Want to Learn More?
+
+Check out the official [InterSystems Learning Portal](https://learning.intersystems.com) for more courses, videos, and certifications on interoperability and beyond.
