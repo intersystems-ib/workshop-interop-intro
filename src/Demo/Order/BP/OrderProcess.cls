@@ -2,6 +2,11 @@
 Class Demo.Order.BP.OrderProcess Extends Ens.BusinessProcessBPL
 {
 
+Storage Default
+{
+<Type>%Storage.Persistent</Type>
+}
+
 /// BPL Definition
 XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 {
@@ -11,7 +16,7 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 <property name='notificationReq' type='Demo.Order.Msg.NotificationReq' instantiate='0' />
 </context>
 <sequence xend='200' yend='550' >
-<call name='Query Customer database' target='MySQL Operation' async='0' timeout='30' xpos='200' ypos='250' >
+<call name='Customer DB Query' target='Customer MySQL Query' async='0' timeout='30' xpos='200' ypos='250' >
 <annotation><![CDATA[MySQL]]></annotation>
 <request type='Demo.Order.CSVRecordMap.Record' >
 <assign property="callrequest" value="request" action="set" languageOverride="" />
@@ -21,7 +26,7 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 </response>
 </call>
 <transform name='Order to Notification' class='Demo.Order.DT.OrderRecordToNotificationReq' source='request' target='context.notificationReq' xpos='200' ypos='350' />
-<call name='Send Notification' target='Notification API Operation' async='1' xpos='200' ypos='450' >
+<call name='Send Notification' target='Notification API Out' async='1' xpos='200' ypos='450' >
 <annotation><![CDATA[Notification API]]></annotation>
 <request type='Demo.Order.Msg.NotificationReq' >
 <assign property="callrequest" value="context.notificationReq" action="set" languageOverride="" />
@@ -29,11 +34,6 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 </call>
 </sequence>
 </process>
-}
-
-Storage Default
-{
-<Type>%Storage.Persistent</Type>
 }
 
 }

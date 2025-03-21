@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApplicationsExport>
+  <Applications>
+    <AutheEnabled>64</AutheEnabled>
+    <AutoCompile>true</AutoCompile>
+    <CookiePath>/order/api/</CookiePath>
+    <CorsCredentialsAllowed>false</CorsCredentialsAllowed>
+    <CSPZENEnabled>true</CSPZENEnabled>
+    <CSRFToken>true</CSRFToken>
+    <DeepSeeEnabled>false</DeepSeeEnabled>
+    <DispatchClass>Demo.Order.BS.OrderAPI</DispatchClass>
+    <Enabled>true</Enabled>
+    <HyperEvent>0</HyperEvent>
+    <iKnowEnabled>false</iKnowEnabled>
+    <InbndWebServicesEnabled>true</InbndWebServicesEnabled>
+    <IsNameSpaceDefault>false</IsNameSpaceDefault>
+    <JWTAuthEnabled>false</JWTAuthEnabled>
+    <JWTAccessTokenTimeout>60</JWTAccessTokenTimeout>
+    <JWTRefreshTokenTimeout>900</JWTRefreshTokenTimeout>
+    <LockCSPName>true</LockCSPName>
+    <MatchRoles>
+      <MatchRolesItem>:%All</MatchRolesItem>
+    </MatchRoles>
+    <Name>/order/api</Name>
+    <NameSpace>INTEROP</NameSpace>
+    <Recurse>true</Recurse>
+    <RedirectEmptyPath>true</RedirectEmptyPath>
+    <ServeFiles>1</ServeFiles>
+    <ServeFilesTimeout>3600</ServeFilesTimeout>
+    <Timeout>900</Timeout>
+    <TwoFactorEnabled>false</TwoFactorEnabled>
+    <Type>2</Type>
+    <UseCookies>2</UseCookies>
+    <SessionScope>2</SessionScope>
+    <UserCookieScope>2</UserCookieScope>
+    <Version>3</Version>
+  </Applications>
+</ApplicationsExport>

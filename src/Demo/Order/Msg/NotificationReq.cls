@@ -1,4 +1,4 @@
-Class Demo.Order.Msg.NotificationReq Extends (Ens.Request, %JSON.Adaptor)
+Class Demo.Order.Msg.NotificationReq Extends Grongier.JsonTraceViewer.Request
 {
 
 Property Content As %String(MAXLEN = "");

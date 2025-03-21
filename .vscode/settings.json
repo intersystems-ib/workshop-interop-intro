@@ -3,7 +3,7 @@
         "active": true,
         "username": "superuser",
         "password": "SYS",
-        "ns": "USER",
+        "ns": "INTEROP",
         "port": 52773,
         "host": "localhost",
         "docker-compose": {
