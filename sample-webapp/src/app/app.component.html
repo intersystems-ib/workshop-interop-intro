@@ -15,12 +15,17 @@
           <span style="color:#03b5af">WebApp</span>
         </span>
   
-        <a mat-list-item routerLink="/create-order">
+        <a mat-list-item routerLink="/create-order" *ngIf="auth.getIsLoggedIn()">
           <mat-icon matListItemIcon>shopping_cart</mat-icon>
           <span matListItemTitle>Create Order</span>
         </a>
   
         <hr>
+
+        <a mat-list-item routerLink="/login" *ngIf="!auth.getIsLoggedIn()">
+          <mat-icon matListItemIcon>login</mat-icon>
+          <span matListItemTitle>Login</span>
+        </a>
 
       </mat-nav-list>
     </mat-sidenav>
@@ -41,7 +46,17 @@
         <span class="fill-space"></span>
         <span style='margin-right:20px;'>
         </span>
+        <button *ngIf="auth.getIsLoggedIn()" mat-icon-button [matMenuTriggerFor]="userMenu">
+          <span style="font-size:medium;font-weight: 300;position:absolute;right:0px;top:10px;">
+            <mat-icon>account_circle</mat-icon>
+            <span style="position:relative;top:-5px">&nbsp;{{ auth.getCurrentUsername() }}&nbsp;</span>
+            <mat-icon>arrow_drop_down</mat-icon>
+          </span>
+        </button>
 
+        <mat-menu #userMenu="matMenu">
+          <button mat-menu-item (click)="auth.logout()"> <mat-icon matListItemIcon>logout</mat-icon>Logout</button>
+        </mat-menu>
         
       </mat-toolbar>
   

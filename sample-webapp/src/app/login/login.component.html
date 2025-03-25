@@ -1,0 +1,16 @@
+<mat-card class="login-card">
+    <h2>🔐 Login</h2>
+    <form [formGroup]="form" (ngSubmit)="onLogin()">
+      <mat-form-field class="w-100" appearance="fill">
+        <mat-label>User</mat-label>
+        <input matInput formControlName="user" required>
+      </mat-form-field>
+
+      <mat-form-field class="w-100" appearance="fill">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" required>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Login</button>
+    </form>
+  </mat-card>
