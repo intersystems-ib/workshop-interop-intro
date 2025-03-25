@@ -33,4 +33,9 @@
     set $namespace = "%SYS"
     do ##class(Security.Applications).Import("/opt/irisapp/install/order-api-webapp.xml")
 
+    // config %db_default resource
+    set dbdefault = ##class(Security.Resources).%OpenId("%db_%default")
+    set dbdefault.PublicPermission="RW"
+    do dbdefault.%Save()
+
     halt

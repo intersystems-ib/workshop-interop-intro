@@ -4,7 +4,18 @@
     <AutheEnabled>64</AutheEnabled>
     <AutoCompile>true</AutoCompile>
     <CookiePath>/order/api/</CookiePath>
-    <CorsCredentialsAllowed>false</CorsCredentialsAllowed>
+    <CorsAllowlist>
+      <CorsAllowlistItem>http://localhost:4200</CorsAllowlistItem>
+    </CorsAllowlist>
+    <CorsCredentialsAllowed>true</CorsCredentialsAllowed>
+    <CorsHeadersList>
+      <CorsHeadersListItem>Origin</CorsHeadersListItem>
+      <CorsHeadersListItem>X-Requested-With</CorsHeadersListItem>
+      <CorsHeadersListItem>Content-Type</CorsHeadersListItem>
+      <CorsHeadersListItem>Accept</CorsHeadersListItem>
+      <CorsHeadersListItem>Authorization</CorsHeadersListItem>
+      <CorsHeadersListItem>Cache-Control</CorsHeadersListItem>
+    </CorsHeadersList>
     <CSPZENEnabled>true</CSPZENEnabled>
     <CSRFToken>true</CSRFToken>
     <DeepSeeEnabled>false</DeepSeeEnabled>

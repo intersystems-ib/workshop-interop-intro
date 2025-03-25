@@ -1,6 +1,8 @@
 Class Demo.Order.BS.OrderAPI Extends (%CSP.REST, Ens.BusinessService)
 {
 
+Parameter HandleCorsRequest = 1;
+
 XData UrlMap [ XMLNamespace = "http://www.intersystems.com/urlmap" ]
 {
 <Routes>

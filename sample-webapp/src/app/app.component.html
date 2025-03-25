@@ -1,0 +1,62 @@
+<mat-sidenav-container fullscreen>
+    <div class="left-panel">
+      <!--<img src="./assets/img/logo.png" alt="App Logo" style="max-width: 10%; max-height: 80%; object-fit: contain;">-->
+      <span class="custom-navbarTitle" style="color:#343695;font-size: xx-large; margin-top: 10px;">
+        <span style="color:#02b5af">WebApp</span>
+      </span><br>
+    </div>
+    <!-- sidenav menu -->
+    <mat-sidenav #sidenav class="custom-drawer-inner-container">
+      <mat-nav-list (click)="sidenav.close()">
+  
+        <!--<img src="assets/img/logo.png" alt="" class="custom-navbarIcon" />-->
+  
+        <span class="custom-navbarTitle" style="color:#343695;font-size: x-large; margin-top: 10px;">
+          <span style="color:#03b5af">WebApp</span>
+        </span>
+  
+        <a mat-list-item routerLink="/create-order">
+          <mat-icon matListItemIcon>shopping_cart</mat-icon>
+          <span matListItemTitle>Create Order</span>
+        </a>
+  
+        <hr>
+
+      </mat-nav-list>
+    </mat-sidenav>
+  
+    <!-- main -->
+    <mat-sidenav-content>
+      <mat-toolbar color="primary">
+  
+        <!-- left aligned-->
+        <button class="menu-button" mat-icon-button (click)="sidenav.open('mouse')">
+          <mat-icon>menu</mat-icon>
+        </button>
+  
+        <span class="custom-navbarTitle" style="color:#343695;font-size: x-large; margin-top: 10px;">
+          <span style="color:#02b5af">WebApp</span>
+        </span>
+        <!-- right aligned -->
+        <span class="fill-space"></span>
+        <span style='margin-right:20px;'>
+        </span>
+
+        
+      </mat-toolbar>
+  
+      <div class="main-content">
+        <router-outlet></router-outlet>
+      </div>
+  
+      <div class="footer">
+        <div>
+          <span class="custom-navbarTitle"
+            style="color:#343695;font-size: small; margin-top: 10px;text-align: center;">
+            <span style="color:#999">WebApp</span>
+          </span>
+        </div>
+      </div>
+  
+    </mat-sidenav-content>
+  </mat-sidenav-container>
