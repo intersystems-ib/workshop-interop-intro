@@ -187,6 +187,9 @@ curl -X POST http://localhost:52773/order/api/order \
 
 > 💡 Check the [Message Viewer](http://localhost:52773/csp/user/EnsPortal.MessageViewer.zen) to see how the new REST request flows through the production.
 
+3. After successfully testing the service using `curl`, try this [sample web app](http://localhost:8080).  
+   It's a **simple Angular frontend** designed to illustrate how a web application can interact with **IRIS APIs**.
+
 ---
 
 ## 🧑‍🏫 Want to Learn More?
