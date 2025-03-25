@@ -4,106 +4,116 @@
       <mat-card class="shadow">
         <mat-card-title class="text-center mb-3">🛒 Create Order</mat-card-title>
         <mat-card-content>
-          <form [formGroup]="orderForm" (ngSubmit)="submitOrder()">
 
-            <h4 class="text-primary">📦 Order Info</h4>
-            <div class="row g-3">
-              <div class="col-md-6">
-                <mat-form-field appearance="outline" class="w-100">
-                  <mat-label>Order ID</mat-label>
-                  <input matInput formControlName="OrderID" placeholder="e.g. 88523">
-                </mat-form-field>
+          <div *ngIf="formVisible; else submittedBlock">
+            <form [formGroup]="orderForm" (ngSubmit)="submitOrder()">
+
+              <h4 class="text-primary">📦 Order Info</h4>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Order ID</mat-label>
+                    <input matInput formControlName="OrderID" placeholder="e.g. 88523">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Order Priority</mat-label>
+                    <mat-select formControlName="OrderPriority">
+                      <mat-option value="Not Specified">Not Specified</mat-option>
+                      <mat-option value="Low">Low</mat-option>
+                      <mat-option value="Medium">Medium</mat-option>
+                      <mat-option value="High">High</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Order Date</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="OrderDate" placeholder="MM/DD/YYYY">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Customer ID</mat-label>
+                    <input matInput formControlName="CustomerID" placeholder="e.g. 3">
+                  </mat-form-field>
+                </div>
               </div>
 
-              <div class="col-md-6">
-                <mat-form-field appearance="outline" class="w-100">
-                  <mat-label>Order Priority</mat-label>
-                  <mat-select formControlName="OrderPriority">
-                    <mat-option value="Not Specified">Not Specified</mat-option>
-                    <mat-option value="Low">Low</mat-option>
-                    <mat-option value="Medium">Medium</mat-option>
-                    <mat-option value="High">High</mat-option>
-                  </mat-select>
-                </mat-form-field>
+              <h4 class="text-primary mt-4">🖥️ Product Info</h4>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Product Name</mat-label>
+                    <input matInput formControlName="ProductName" placeholder="e.g. V70">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Product Category</mat-label>
+                    <mat-select formControlName="ProductCategory">
+                      <mat-option value="Technology">Technology</mat-option>
+                      <mat-option value="Furniture">Furniture</mat-option>
+                      <mat-option value="Office Supplies">Office Supplies</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Product Subcategory</mat-label>
+                    <input matInput formControlName="ProductSubCategory" placeholder="e.g. Telephones and Communication">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Product Container</mat-label>
+                    <mat-select formControlName="ProductContainer">
+                      <mat-option value="Small Box">Small Box</mat-option>
+                      <mat-option value="Medium Box">Medium Box</mat-option>
+                      <mat-option value="Large Box">Large Box</mat-option>
+                      <mat-option value="Wrap Bag">Wrap Bag</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
               </div>
 
-              <div class="col-md-6">
-                <mat-form-field appearance="outline" class="w-100">
-                  <mat-label>Order Date</mat-label>
-                  <input matInput [matDatepicker]="picker" formControlName="OrderDate" placeholder="MM/DD/YYYY">
-                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                  <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
+              <h4 class="text-primary mt-4">🚚 Shipping & Pricing</h4>
+              <div class="row g-3">
+                <div class="col-md-6" *ngFor="let field of priceFields">
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>{{ field.label }}</mat-label>
+                    <input matInput [type]="field.type" [placeholder]="field.placeholder" [formControlName]="field.control">
+                  </mat-form-field>
+                </div>
               </div>
 
-              <div class="col-md-6">
-                <mat-form-field appearance="outline" class="w-100">
-                  <mat-label>Customer ID</mat-label>
-                  <input matInput formControlName="CustomerID" placeholder="e.g. 3">
-                </mat-form-field>
+              <div class="d-flex justify-content-end mt-4">
+                <button mat-raised-button color="primary" type="submit" [disabled]="isSubmitting || orderForm.invalid">
+                  <mat-icon>send</mat-icon>Submit Order
+                </button>
               </div>
-            </div>
+            </form>
+          </div>
 
-            <h4 class="text-primary mt-4">🖥️ Product Info</h4>
-            <div class="row g-3">
-              <div class="col-md-6">
-                <mat-form-field appearance="outline" class="w-100">
-                  <mat-label>Product Name</mat-label>
-                  <input matInput formControlName="ProductName" placeholder="e.g. V70">
-                </mat-form-field>
-              </div>
-
-              <div class="col-md-6">
-                <mat-form-field appearance="outline" class="w-100">
-                  <mat-label>Product Category</mat-label>
-                  <mat-select formControlName="ProductCategory">
-                    <mat-option value="Technology">Technology</mat-option>
-                    <mat-option value="Furniture">Furniture</mat-option>
-                    <mat-option value="Office Supplies">Office Supplies</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-
-              <div class="col-md-6">
-                <mat-form-field appearance="outline" class="w-100">
-                  <mat-label>Product Subcategory</mat-label>
-                  <input matInput formControlName="ProductSubCategory" placeholder="e.g. Telephones and Communication">
-                </mat-form-field>
-              </div>
-
-              <div class="col-md-6">
-                <mat-form-field appearance="outline" class="w-100">
-                  <mat-label>Product Container</mat-label>
-                  <mat-select formControlName="ProductContainer">
-                    <mat-option value="Small Box">Small Box</mat-option>
-                    <mat-option value="Medium Box">Medium Box</mat-option>
-                    <mat-option value="Large Box">Large Box</mat-option>
-                    <mat-option value="Wrap Bag">Wrap Bag</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-            </div>
-
-            <h4 class="text-primary mt-4">🚚 Shipping & Pricing</h4>
-            <div class="row g-3">
-              <div class="col-md-6" *ngFor="let field of priceFields">
-                <mat-form-field appearance="outline" class="w-100">
-                  <mat-label>{{ field.label }}</mat-label>
-                  <input matInput [type]="field.type" [placeholder]="field.placeholder"
-                    [formControlName]="field.control">
-                </mat-form-field>
-              </div>
-            </div>
-
-            <div class="d-flex justify-content-end mt-4">
-              <button mat-raised-button color="primary" type="submit" [disabled]="isSubmitting || orderForm.invalid">
-                <mat-icon>send</mat-icon> Submit Order
+          <ng-template #submittedBlock>
+            <div class="text-center py-5">
+              <h2 class="text-success">Order submitted successfully!</h2>
+              <button mat-raised-button color="accent" (click)="resetForm()">
+                <mat-icon>repeat</mat-icon>Create Another Order
               </button>
             </div>
-          </form>
+          </ng-template>
 
           <mat-progress-bar *ngIf="isSubmitting" mode="indeterminate" class="mt-3"></mat-progress-bar>
-          <p *ngIf="successMessage" class="text-success mt-3">{{ successMessage }}</p>
           <p *ngIf="errorMessage" class="text-danger mt-3">{{ errorMessage }}</p>
         </mat-card-content>
       </mat-card>

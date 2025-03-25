@@ -40,8 +40,8 @@ import { NgFor } from '@angular/common';
 export class OrderCreateComponent {
   orderForm: FormGroup;
   isSubmitting = false;
-  successMessage = '';
   errorMessage = '';
+  formVisible = true;
 
   priceFields = [
     { label: 'Ship Mode', control: 'ShipMode', type: 'text', placeholder: 'e.g. Express Air' },
@@ -54,27 +54,50 @@ export class OrderCreateComponent {
 
   constructor(private fb: FormBuilder, private orderService: OrderService) {
     this.orderForm = this.fb.group({
-      OrderPriority: ['Not Specified', Validators.required],
-      Discount: ['0', Validators.required],
-      UnitPrice: ['205.99', Validators.required],
-      ShippingCost: ['2.5', Validators.required],
-      CustomerID: ['3', Validators.required],
-      ShipMode: ['Express Air', Validators.required],
-      ProductCategory: ['Technology', Validators.required],
-      ProductSubCategory: ['Telephones and Communication', Validators.required],
-      ProductContainer: ['Small Box', Validators.required],
-      ProductName: ['V70', Validators.required],
-      OrderDate: [new Date('2011-07-27'), Validators.required],
-      Quantity: ['8', Validators.required],
-      Sales: ['1446.67', Validators.required],
-      OrderID: ['88523', Validators.required]
+      OrderPriority: ['', Validators.required],
+      Discount: ['', Validators.required],
+      UnitPrice: ['', Validators.required],
+      ShippingCost: ['', Validators.required],
+      CustomerID: ['', Validators.required],
+      ShipMode: ['', Validators.required],
+      ProductCategory: ['', Validators.required],
+      ProductSubCategory: ['', Validators.required],
+      ProductContainer: ['', Validators.required],
+      ProductName: ['', Validators.required],
+      OrderDate: [null, Validators.required],
+      Quantity: ['', Validators.required],
+      Sales: ['', Validators.required],
+      OrderID: ['', Validators.required]
     });
+
+    this.setRandomSampleData();
+  }
+
+  setRandomSampleData() {
+    const rand = (min: number, max: number) => (Math.random() * (max - min) + min).toFixed(2);
+    const randomDate = new Date(2010 + Math.floor(Math.random() * 10), Math.floor(Math.random() * 12), Math.floor(Math.random() * 28) + 1);
+    const sample = {
+      OrderPriority: 'Medium',
+      Discount: rand(0, 0.3),
+      UnitPrice: rand(50, 500),
+      ShippingCost: rand(1, 10),
+      CustomerID: Math.floor(Math.random() * 100).toString(),
+      ShipMode: 'Express Air',
+      ProductCategory: 'Technology',
+      ProductSubCategory: 'Gadgets',
+      ProductContainer: 'Small Box',
+      ProductName: 'Gizmo ' + Math.floor(Math.random() * 1000),
+      OrderDate: randomDate,
+      Quantity: ''+Math.floor(Math.random() * 10 + 1),
+      Sales: rand(100, 2000),
+      OrderID: (10000 + Math.floor(Math.random() * 90000)).toString()
+    };
+    this.orderForm.patchValue(sample);
   }
 
   submitOrder() {
     if (this.orderForm.invalid) return;
     this.isSubmitting = true;
-    this.successMessage = '';
     this.errorMessage = '';
 
     const payload = {
@@ -85,8 +108,7 @@ export class OrderCreateComponent {
     this.orderService.submitOrder(payload)
       .subscribe({
         next: () => {
-          this.successMessage = 'Order submitted successfully!';
-          this.orderForm.reset();
+          this.formVisible = false;
         },
         error: (err) => {
           this.errorMessage = 'Error submitting order.';
@@ -94,5 +116,11 @@ export class OrderCreateComponent {
         },
         complete: () => this.isSubmitting = false
       });
+  }
+
+  resetForm() {
+    this.orderForm.reset();
+    this.setRandomSampleData();
+    this.formVisible = true;
   }
 }

@@ -6,6 +6,7 @@
     <CookiePath>/order/api/</CookiePath>
     <CorsAllowlist>
       <CorsAllowlistItem>http://localhost:4200</CorsAllowlistItem>
+      <CorsAllowlistItem>http://localhost:8080</CorsAllowlistItem>
     </CorsAllowlist>
     <CorsCredentialsAllowed>true</CorsCredentialsAllowed>
     <CorsHeadersList>

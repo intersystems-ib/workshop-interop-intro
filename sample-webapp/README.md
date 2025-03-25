@@ -66,3 +66,8 @@ ng add @angular/material
 
 ng generate module demo --routing
 
+ng generate component demo/order-create
+
+ng generate service demo/order
+
+ng build --configuration production

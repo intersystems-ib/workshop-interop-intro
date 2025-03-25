@@ -12,6 +12,14 @@ services:
       - ./test:/test
       - ./Practice:/Practice
       - ./install:/install
+
+  webapp:
+    build:
+      context: sample-webapp
+      dockerfile: Dockerfile
+    container_name: webapp
+    ports:
+    - "8080:80"
   
   mysql:
     build:
