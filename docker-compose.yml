@@ -1,5 +1,6 @@
 services:
 
+  # InterSystems IRIS 
   iris:
     build:
       context: .
@@ -13,14 +14,18 @@ services:
       - ./Practice:/Practice
       - ./install:/install
 
+  # Sample Angular Web Application that uses InterSystems IRIS
   webapp:
     build:
       context: sample-webapp
       dockerfile: Dockerfile
+      args:
+        NG_BUILD_OPTS: build:production
     container_name: webapp
     ports:
     - "8080:80"
-  
+
+  # Sample external database to integrate from InterSystems IRIS interoperability framework  
   mysql:
     build:
       context: mysql

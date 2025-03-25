@@ -35,7 +35,7 @@
 
     // config %db_default resource
     set dbdefault = ##class(Security.Resources).%OpenId("%db_%default")
-    set dbdefault.PublicPermission="RW"
+    set dbdefault.PublicPermission="R"
     do dbdefault.%Save()
 
     halt

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ApplicationsExport>
   <Applications>
-    <AutheEnabled>64</AutheEnabled>
+    <AutheEnabled>96</AutheEnabled>
     <AutoCompile>true</AutoCompile>
     <CookiePath>/order/api/</CookiePath>
     <CorsAllowlist>
@@ -26,7 +26,7 @@
     <iKnowEnabled>false</iKnowEnabled>
     <InbndWebServicesEnabled>true</InbndWebServicesEnabled>
     <IsNameSpaceDefault>false</IsNameSpaceDefault>
-    <JWTAuthEnabled>false</JWTAuthEnabled>
+    <JWTAuthEnabled>true</JWTAuthEnabled>
     <JWTAccessTokenTimeout>60</JWTAccessTokenTimeout>
     <JWTRefreshTokenTimeout>900</JWTRefreshTokenTimeout>
     <LockCSPName>true</LockCSPName>
