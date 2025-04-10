@@ -82,6 +82,8 @@ In this scenario, the system receives a loan request and queries multiple banks 
 
 This example processes incoming orders, enriches them with customer info from a MySQL database, and sends data to web services.
 
+<img src="./img/scenario-order.png" width="900px"/>
+
 #### 🗃️ Check the External Database
 
 A MySQL database is already running in your Docker environment.
